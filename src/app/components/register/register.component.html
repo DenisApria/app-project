@@ -1,0 +1,128 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!--
+<form class="form" [formGroup]="registrationForm" (ngSubmit)="Register">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" id="firstName" formControlName="firstName" required="">
+                    </div>
+                
+                    <div class="form-group col-md-6">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" formControlName="lastName" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" formControlName="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" formControlName="password" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="job">Job</label>
+                    <select *appUnless="jobOptions.length==0" class="form-control custom-select" aria-label="Default select example" id="jobId" formControlName="jobId" >
+        
+                        <option *ngFor="let job of jobOptions" [ngValue]="job">{{job.title}}</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary" (click)="Register()">Register</button>
+
+                <p>Already have an account? <a (click)="goToLogin()">Sign in</a></p>
+            </form>
+-->
+<body>
+    <div class="navdiv">
+        <ul class="nav-links">
+            <li class="left"><header>Shift Controller</header></li>
+            <li class="right"></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="box form-box">
+            <header>Register</header>
+            <form class="form" [formGroup]="registrationForm" (ngSubmit)="Register">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" id="firstName" formControlName="firstName" required="">
+                        <div *ngIf="registrationForm.get('firstName')?.hasError('required') && registrationForm.get('firstName')?.touched" class="text-danger small">
+                            <i class="fas fa-exclamation-circle"></i> First Name is required.
+                        </div>
+                    </div>
+                    
+                
+                    <div class="form-group col-md-6">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" formControlName="lastName" required>
+                        <div *ngIf="registrationForm.get('lastName')?.hasError('required') && registrationForm.get('lastName')?.touched" class="text-danger small">
+                            <i class="fas fa-exclamation-circle"></i> Last Name is required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" formControlName="email" required>
+                    <div *ngIf="registrationForm.get('email')?.hasError('required') && registrationForm.get('email')?.touched" class="text-danger small">
+                        <i class="fas fa-exclamation-circle"></i> Email is required.
+                    </div>
+                    <div *ngIf="registrationForm.get('email')?.hasError('email') && registrationForm.get('email')?.touched" class="text-danger small">
+                        <i class="fas fa-exclamation-circle"></i> Please enter a valid email address.
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" formControlName="password" required>
+                        <div *ngIf="registrationForm.get('password')?.hasError('required') && registrationForm.get('password')?.touched" class="text-danger small">
+                            <i class="fas fa-exclamation-circle"></i> Password is required.
+                        </div>
+                        <div *ngIf="registrationForm.get('password')?.hasError('minlength') && registrationForm.get('password')?.touched" class="text-danger small">
+                            <i class="fas fa-exclamation-circle"></i> Password must be at least 6 characters long.
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <small *ngIf="registrationForm.hasError('passwordMismatch') && (registrationForm.get('password')?.dirty
+                            || registrationForm.get('confirmPassword')?.dirty)" class="text-danger small">
+                            <i class="fas fa-exclamation-circle"></i> Password must match.
+                        </small>
+                        <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" required>
+                        <div *ngIf="registrationForm.get('confirmPassword')?.hasError('required') && registrationForm.get('confirmPassword')?.touched" class="text-danger small">
+                            <i class="fas fa-exclamation-circle"></i> Confirm Password is required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="job">Job</label>
+                    <select *appUnless="jobOptions.length==0" class="form-control custom-select" aria-label="Default select example" id="jobId" formControlName="jobId" >
+        
+                        <option *ngFor="let job of jobOptions" [ngValue]="job">{{job.title}}</option>
+                    </select>
+                    <div *ngIf="registrationForm.get('jobId')?.hasError('required') && registrationForm.get('jobId')?.touched" class="text-danger small">
+                        <i class="fas fa-exclamation-circle"></i> Job is required.
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" (click)="Register()">Register</button>
+
+                <p>Already have an account? <a (click)="goToLogin()">Sign in</a></p>
+            </form>
+        </div>
+    </div>
+</body>

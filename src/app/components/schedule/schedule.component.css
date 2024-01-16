@@ -1,0 +1,148 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 93vh;
+}
+.box{
+    background: #fdfdfd;
+    display: flex;
+    flex-direction: column;
+    padding: 25px 25px;
+    border-radius: 20px;
+    box-shadow: 0 0 128px 20px rgba(0,0,0,0.1),
+                0 32px 64px -48px rgba(0,0,0,0.5);
+}
+.form-box{
+    width: 1200px;
+    margin: 0px 10px;
+                margin-left: 60px;
+}
+.rightBox {
+    width: 550px;
+}
+.form-box header{
+    font-size: 25px;
+    font-weight: 600;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e6e6e6;
+    margin-bottom: 10px;
+}
+.form-box form .field{
+    display: flex;
+    margin-bottom: 10px;
+    flex-direction: column;
+}
+.form-box form .input input{
+    height: 40px;
+    width: 100%;
+    font-size: 16px;
+    padding: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+
+input {
+    margin-bottom: 0px;
+    margin-top: 2px;
+    border: solid;
+    border-width: 1px;
+    border-color: rgba(61, 54, 165, 0.808);
+    background-color: #fff;
+    border-radius: 5px;
+    outline: none;
+    width: 100%;
+    height: 45px;
+    font-size: 1.2em;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.btn{
+    height: 40px;
+    width: 100%;
+    background: rgba(61, 54, 165, 0.808);
+    border: 0;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 17px;
+    cursor: pointer;
+    transition: all .3s;
+    margin-top: 10px;
+    padding: 0px 10px;
+}
+.btnWeek{
+    width: 200px;
+}
+.btnL{
+    margin-right: 50px;
+}
+.btnR{
+    margin-left: 50px;
+}
+.btn-success{
+    background: rgba(54, 165, 65, 0.808);
+}
+.btn-danger{
+    background: rgba(233, 42, 64, 0.808);
+}
+.btn:hover{
+    opacity: 0.82;
+}
+.submit{
+    width: 100%;
+}
+
+div.small {
+    font-size: 12px;
+    margin-bottom: -18px;
+}
+small {
+    font-size: 11px;
+}
+div.smallside {
+    font-size: 12px;
+    margin-top: -18px;
+    margin-left: 170px;
+}
+
+.scheduleCell {
+    background-color: rgba(110, 200, 119, 0.808);
+    border-radius: 5px;
+    font-size: 10.3px;
+    text-align: center;
+}
+.tallRow td {
+    height: 70px;
+    overflow: hidden;
+}
+
+.scheduleCell div {
+    height: 100%;
+    overflow-y: auto;
+}
+
+
+.morningShift {
+    background-color: rgba(110, 200, 119, 0.808);
+    margin-bottom: 2.5px;
+    margin-top: 2.5px;
+}
+
+.eveningShift {
+    background: rgba(129, 124, 200, 0.808);
+    margin-bottom: 2.5px;
+    margin-top: 2.5px;
+}
+.notAccepted {
+    background: rgba(233, 42, 64, 0.808);
+    margin-bottom: 2.5px;
+    margin-top: 2.5px;
+}

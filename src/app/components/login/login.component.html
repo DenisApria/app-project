@@ -1,0 +1,58 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!--
+<form [formGroup]="loginForm">
+    <h2>Log in</h2>
+    <div>
+        <label for="email">Email</label>
+        <input type="text" id="email" formControlName="email" 
+        placeholder="Email">
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" 
+        placeholder="Email">
+    </div>
+
+    <button (click)="Login()">Log In</button>
+    <button (click)="goToRegister()">Register</button>
+</form>
+-->
+<body>
+    <div class="navdiv">
+        <ul class="nav-links">
+            <li class="left"><header>Shift Controller</header></li>
+            <li class="right"></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="box form-box">
+            <header>Sign In</header>
+            <form [formGroup]="loginForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" formControlName="email" required>
+                    <div *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched" class="text-danger small">
+                        <i class="fas fa-exclamation-circle"></i> Email is required.
+                    </div>
+                    <div *ngIf="loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched" class="text-danger small">
+                        <i class="fas fa-exclamation-circle"></i> Please enter a valid email address.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" formControlName="password" required>
+                    <div *ngIf="loginError" class="text-danger small">
+                        <i class="fas fa-exclamation-circle"></i> Incorrect email or password.
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" (click)="Login()">Log In</button>
+
+                <p>Don't have an account? <a (click)="goToRegister()">Register Now</a></p>
+            </form>
+        </div>
+    </div>
+</body>
+

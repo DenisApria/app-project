@@ -1,0 +1,196 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<body>
+    <div class="navdiv">
+      <ul class="nav-links">
+        <li class="left">
+          <header>Shift Controller</header>
+        </li>
+        <li class="right">
+          <button class="btn-primary btnRight" (click)="logOut()">Log Out</button>
+        </li>
+      </ul>
+    </div>
+  
+    <div class="container scheduleContainer">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="box form-box">
+                    <header>Approve Schedule Request</header>
+                    <form (ngSubmit)="approveSchedule()" [formGroup]="approveScheduleForm">
+                        <div class="form-group">
+                            <label for="scheduleIdToApprove">Schedule ID to Approve</label>
+                            <input type="number" id="scheduleIdToApprove" formControlName="scheduleId" class="form-control" />
+                            <div class="text-danger small"
+                                *ngIf="approveScheduleForm.get('scheduleId')?.hasError('required') && approveScheduleForm.get('scheduleId')?.touched">
+                                <i class="fas fa-exclamation-circle"></i> Schedule ID is required.
+                            </div>
+                        </div>
+            
+                        <button type="submit" class="btn btn-success">Approve Schedule</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="box form-box">
+                    <header>Delete Schedule</header>
+                    <form (ngSubmit)="deleteSchedule()" [formGroup]="deleteScheduleForm">
+                    <div class="form-group">
+                        <label for="scheduleIdToDelete">Schedule ID to Delete</label>
+                        <input type="number" id="scheduleIdToDelete" formControlName="scheduleId" class="form-control" />
+                        <div class="text-danger small"
+                            *ngIf="deleteScheduleForm.get('scheduleId')?.hasError('required') && deleteScheduleForm.get('scheduleId')?.touched">
+                            <i class="fas fa-exclamation-circle"></i> Schedule ID is required.
+                        </div>
+                    </div>
+        
+                    <button type="submit" class="btn btn-danger">Delete Schedule</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <div class="container tableContainer" style="margin-top: 20px;">
+        <app-schedule></app-schedule>
+    </div>
+  
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="box form-box">
+                    <header>Add New Job</header>
+                    <form class="form" (ngSubmit)="addNewJob()" [formGroup]="newJobForm">
+                    <div class="form-group">
+                        <label for="newJobName">New Job Name</label>
+                        <input type="text" id="newJobName" formControlName="name" class="form-control" />
+                        <div class="text-danger small"
+                        *ngIf="newJobForm.get('name')?.hasError('required') && newJobForm.get('name')?.touched">
+                        <i class="fas fa-exclamation-circle"></i> Name is required.
+                        </div>
+                    </div>
+        
+                    <button type="submit" class="btn btn-success">Add New Job</button>
+                    </form>
+                    <br>
+                    <header>Delete Job</header>
+                    <form (ngSubmit)="deleteJob()" [formGroup]="deleteJobForm">
+                        <div class="form-group">
+                            <label for="jobIdToDelete">Job ID to Delete</label>
+                            <div *ngIf="jobNotFoundError" class="text-danger smallside">
+                                <i class="fas fa-exclamation-circle"></i> Job not found. Please enter a valid Job ID.
+                            </div>
+                            <input type="number" id="jobIdToDelete" formControlName="jobId" class="form-control" />
+                            <div class="text-danger small"
+                                *ngIf="deleteJobForm.get('jobId')?.hasError('required') && deleteJobForm.get('jobId')?.touched">
+                                <i class="fas fa-exclamation-circle"></i> Job ID is required.
+                            </div>
+                        </div>
+        
+                        <button type="submit" class="btn btn-danger">Delete Job</button>
+                    </form>
+                </div>
+            </div>
+    
+            <div class="col-md-6">
+                <div class="box form-box rightBox">
+                    <header>Change User Role</header>
+                    <form (ngSubmit)="changeUserRole()" [formGroup]="changeUserRoleForm">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="userIdToChangeRole">User ID</label>
+                                <input type="number" id="userIdToChangeRole" formControlName="userId" class="form-control" />
+                                <div class="text-danger small"
+                                    *ngIf="changeUserRoleForm.get('userId')?.hasError('required') && changeUserRoleForm.get('userId')?.touched">
+                                    <i class="fas fa-exclamation-circle"></i> User ID is required.
+                                </div>
+                            </div>
+            
+                            <div class="form-group col-md-6">
+                                <label for="newRoleId">New Role ID</label>
+                                <input type="number" id="newRoleId" formControlName="newRoleId" class="form-control" />
+                                <div class="text-danger small"
+                                    *ngIf="changeUserRoleForm.get('newRoleId')?.hasError('required') && changeUserRoleForm.get('newRoleId')?.touched">
+                                    <i class="fas fa-exclamation-circle"></i> New Role ID is required.
+                                </div>
+                            </div>
+                        </div>
+        
+                        <button type="submit" class="btn btn-success">Change User Role</button>
+                    </form>
+
+                    <br>
+
+                    <header>Delete User</header>
+                    <form (ngSubmit)="deleteUser()" [formGroup]="deleteUserForm">
+                        <div class="form-group">
+                            <label for="userIdToDelete">User ID to Delete</label>
+                            <div *ngIf="userNotFoundError" class="text-danger smallside">
+                                <i class="fas fa-exclamation-circle"></i> User not found. Please enter a valid User ID.
+                            </div>
+                            <input type="number" id="userIdToDelete" formControlName="userId" class="form-control" />
+                            <div class="text-danger small"
+                                *ngIf="deleteUserForm.get('userId')?.hasError('required') && deleteUserForm.get('userId')?.touched">
+                                <i class="fas fa-exclamation-circle"></i> User ID is required.
+                            </div>
+                        </div>
+        
+                        <button type="submit" class="btn btn-danger">Delete User</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="box form-box">
+                    <header>Jobs Table</header>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th>Job ID</th>
+                            <th>Title</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let job of jobs">
+                            <td>{{ job.id }}</td>
+                            <td>{{ job.title }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    
+            <div class="col-md-6">
+                <div class="box form-box rightBox">
+                    <header>Users Table</header>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th>User ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Job ID</th>
+                            <th>Role ID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of users">
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.firstName }}</td>
+                            <td>{{ user.lastName }}</td>
+                            <td>{{ user.jobId }}</td>
+                            <td>{{ user.roleId }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+  </body>
