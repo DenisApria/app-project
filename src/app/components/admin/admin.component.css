@@ -10,7 +10,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 93vh;
+    min-height: 45vh;
 }
 .scheduleContainer{
     margin-top: 30px;
@@ -94,6 +94,9 @@ input {
 .btn:hover{
     opacity: 0.82;
 }
+.tablebtn{
+    margin-top: -10px;
+}
 .submit{
     width: 100%;
 }
@@ -153,4 +156,10 @@ li header{
     font-size: 25px;
     font-weight: 600;
     color: rgba(61, 54, 165, 0.808);
+}
+.narrow{
+    width: 80px;
+}
+.table{
+    margin-top: 15px;
 }
