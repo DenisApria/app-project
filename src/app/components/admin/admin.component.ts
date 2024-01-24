@@ -75,6 +75,8 @@ export class AdminComponent implements OnInit {
       this.adminService.addNewJob(jobData).subscribe({
         next: (response) => {
           console.log('New job added successfully:', response);
+          this.fetchJobs();
+          this.newJobForm.reset();
         },
         error: (error) => {
           console.error('Error adding new job:', error);
@@ -93,6 +95,8 @@ export class AdminComponent implements OnInit {
       this.adminService.deleteJob(jobId).subscribe({
         next: (response) => {
           console.log('Job deleted successfully:', response);
+          this.fetchJobs();
+          this.deleteJobForm.reset();
         },
         error: (error) => {
           if (error.status === 404) {
@@ -116,6 +120,8 @@ export class AdminComponent implements OnInit {
       this.adminService.deleteUser(userId).subscribe({
         next: (response) => {
           console.log('User deleted successfully:', response);
+          this.fetchUsers();
+          this.deleteUserForm.reset();
         },
         error: (error) => {
           if (error.status === 404) {
@@ -139,6 +145,8 @@ export class AdminComponent implements OnInit {
       this.adminService.changeUserRole(userId, newRoleId).subscribe({
         next: (response) => {
           console.log('Role changed successfully:', response);
+          this.fetchUsers();
+          this.changeUserRoleForm.reset();
         },
         error: (error) => {
           if (error.status === 404) {
