@@ -86,7 +86,25 @@ export class AdminComponent implements OnInit {
   }
 
   jobNotFoundError: boolean = false;
-  deleteJob() {
+  deleteJob(jobId: number) {
+    this.jobNotFoundError = false;
+
+    this.adminService.deleteJob(jobId).subscribe({
+        next: (response) => {
+            console.log('Job deleted successfully:', response);
+            this.fetchJobs();
+        },
+        error: (error) => {
+            if (error.status === 404) {
+                console.error('Error deleting job:', error);
+                this.jobNotFoundError = true;
+            } else {
+                console.error('Error deleting job:', error);
+            }
+        }
+    });
+  }
+  /*deleteJob() {
     if (this.deleteJobForm.valid) {
       const jobId = this.deleteJobForm.value.jobId;
 
@@ -108,9 +126,28 @@ export class AdminComponent implements OnInit {
         }
       });
     }
-  }
+  }*/
 
   userNotFoundError: boolean = false;
+  deleteUser(userId: number) {
+    this.userNotFoundError = false;
+
+    this.adminService.deleteUser(userId).subscribe({
+        next: (response) => {
+            console.log('User deleted successfully:', response);
+            this.fetchUsers();
+        },
+        error: (error) => {
+            if (error.status === 404) {
+                console.error('Error deleting user:', error);
+                this.userNotFoundError = true;
+            } else {
+                console.error('Error deleting User:', error);
+            }
+        }
+    });
+  }
+  /*
   deleteUser() {
     if (this.deleteUserForm.valid) {
       const userId = this.deleteUserForm.value.userId;
@@ -133,7 +170,7 @@ export class AdminComponent implements OnInit {
         }
       });
     }
-  }
+  }*/
 
   changeUserRole() {
     if (this.changeUserRoleForm.valid) {
@@ -212,5 +249,16 @@ export class AdminComponent implements OnInit {
         console.error('Error fetching users:', error);
       }
     });
+  }
+
+  showJobsTable: boolean = false;
+  showUsersTable: boolean = false;
+
+  toggleJobsTable() {
+    this.showJobsTable = !this.showJobsTable;
+  }
+
+  toggleUsersTable() {
+    this.showUsersTable = !this.showUsersTable;
   }
 }
