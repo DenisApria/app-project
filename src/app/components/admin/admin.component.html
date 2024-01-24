@@ -73,6 +73,7 @@
         
                     <button type="submit" class="btn btn-success">Add New Job</button>
                     </form>
+                    <!--
                     <br>
                     <header>Delete Job</header>
                     <form (ngSubmit)="deleteJob()" [formGroup]="deleteJobForm">
@@ -89,7 +90,7 @@
                         </div>
         
                         <button type="submit" class="btn btn-danger">Delete Job</button>
-                    </form>
+                    </form>-->
                 </div>
             </div>
     
@@ -119,9 +120,8 @@
         
                         <button type="submit" class="btn btn-success">Change User Role</button>
                     </form>
-
+                    <!--
                     <br>
-
                     <header>Delete User</header>
                     <form (ngSubmit)="deleteUser()" [formGroup]="deleteUserForm">
                         <div class="form-group">
@@ -137,7 +137,7 @@
                         </div>
         
                         <button type="submit" class="btn btn-danger">Delete User</button>
-                    </form>
+                    </form>-->
                 </div>
             </div>
         </div>
@@ -148,17 +148,22 @@
             <div class="col-md-6">
                 <div class="box form-box">
                     <header>Jobs Table</header>
-                    <table class="table">
+                    <button class="btn btn-primary" (click)="toggleJobsTable()">Toggle Jobs Table</button>
+                    <table class="table" *ngIf="showJobsTable">
                         <thead>
                             <tr>
-                            <th>Job ID</th>
-                            <th>Title</th>
+                                <th class="narrow">Job ID</th>
+                                <th class="text-center">Title</th>
+                                <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let job of jobs">
-                            <td>{{ job.id }}</td>
-                            <td>{{ job.title }}</td>
+                                <td>{{ job.id }}</td>
+                                <td class="text-center">{{ job.title }}</td>
+                                <td>
+                                    <button class="btn btn-danger tablebtn" (click)="deleteJob(job.id)">Delete</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -168,23 +173,28 @@
             <div class="col-md-6">
                 <div class="box form-box rightBox">
                     <header>Users Table</header>
-                    <table class="table">
+                    <button class="btn btn-primary" (click)="toggleUsersTable()">Toggle Users Table</button>
+                    <table class="table" *ngIf="showUsersTable">
                         <thead>
                             <tr>
-                            <th>User ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Job ID</th>
-                            <th>Role ID</th>
+                                <th class="narrow">User ID</th>
+                                <th class="text-center">Name</th>
+                                <th class="text-center">Surname</th>
+                                <th class="text-center">JobID</th>
+                                <th class="text-center">RoleID</th>
+                                <th class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let user of users">
-                            <td>{{ user.id }}</td>
-                            <td>{{ user.firstName }}</td>
-                            <td>{{ user.lastName }}</td>
-                            <td>{{ user.jobId }}</td>
-                            <td>{{ user.roleId }}</td>
+                                <td>{{ user.id }}</td>
+                                <td class="text-center">{{ user.firstName }}</td>
+                                <td class="text-center">{{ user.lastName }}</td>
+                                <td class="text-center">{{ user.jobId }}</td>
+                                <td class="text-center">{{ user.roleId }}</td>
+                                <td>
+                                    <button class="btn btn-danger tablebtn" (click)="deleteUser(user.id)">Delete</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -192,5 +202,6 @@
             </div>
         </div>
     </div>
-  
+    <br><br>
+
   </body>
